@@ -534,11 +534,8 @@ function LazyPig_OnEvent(event)
 		LazyPig_CheckManaBuffs()
 
 	elseif event == "PLAYER_AURAS_CHANGED" then
-		-- Skip full scan when event-driven buff tracking handles it
-		if not hasBuffEvents then
-			LazyPig_CheckSalvation()
-			LazyPig_CheckManaBuffs()
-		end
+		LazyPig_CheckSalvation()
+		LazyPig_CheckManaBuffs()
 
 	elseif event == "DUEL_REQUESTED" then
 		duel_active = true
@@ -1427,13 +1424,14 @@ local dismountStrings = {
 
 function LazyPig_Dismount()
 	local buff = 0
-	while GetPlayerBuff(buff) >= 0 do
-		LazyPig_Buff_Tooltip:SetPlayerBuff(GetPlayerBuff(buff))
+	while GetPlayerBuff(buff, "HELPFUL") >= 0 do
+		local index = GetPlayerBuff(buff, "HELPFUL")
+		LazyPig_Buff_Tooltip:SetPlayerBuff(index)
 		local desc = LazyPig_Buff_TooltipTextLeft2:GetText()
 		if desc then
 			for _, str in pairs(dismountStrings) do
 				if strfind(desc, str) then
-					CancelPlayerBuff(buff)
+					CancelPlayerBuff(index)
 					return
 				end
 			end
@@ -1464,16 +1462,16 @@ function LazyPig_DropWSGFlag_NoggBuff()
 	local tooltipfind2 = "You feel light"
 	local tooltipfind3 = not hasNampower_CancelAura and "Slow Fall" or nil
 
-	while GetPlayerBuff(counter) >= 0 do
-		local index, untilCancelled = GetPlayerBuff(counter)
+	while GetPlayerBuff(counter, "HELPFUL") >= 0 do
+		local index = GetPlayerBuff(counter, "HELPFUL")
 		LazyPig_Buff_Tooltip:SetPlayerBuff(index)
 		local desc = LazyPig_Buff_TooltipTextLeft1:GetText()
 		if strfind(desc, tooltipfind1) or (tooltipfind3 and strfind(desc, tooltipfind3)) then
-			CancelPlayerBuff(counter)
+			CancelPlayerBuff(index)
 		end
 		desc = LazyPig_Buff_TooltipTextLeft2:GetText()
 		if strfind(desc, tooltipfind2) then
-			CancelPlayerBuff(counter)
+			CancelPlayerBuff(index)
 		end
 		counter = counter + 1
 	end
@@ -1990,25 +1988,31 @@ function LazyPig_CheckSalvation()
 		end
 	end
 
-	-- Tier 1: Nampower cancel by spell ID (verify buff exists before messaging)
-	if hasNampower_CancelAura and hasGetPlayerBuffID then
-		local found = false
-		local counter = 0
-		while GetPlayerBuff(counter) >= 0 do
-			local index, untilCancelled = GetPlayerBuff(counter)
-			if untilCancelled ~= 1 then
-				local bid = GetPlayerBuffID(index)
-				bid = (bid < -1) and (bid + 65536) or bid
-				if SPELL_SALVATION[bid] then
-					CancelPlayerAuraSpellId(bid, 1)
-					found = true
+	-- Tier 1: Nampower cancel by spell ID
+	if hasNampower_CancelAura then
+		if hasGetPlayerBuffID then
+			local found = false
+			local counter = 0
+			while GetPlayerBuff(counter, "HELPFUL") >= 0 do
+				local index, untilCancelled = GetPlayerBuff(counter, "HELPFUL")
+				if untilCancelled ~= 1 then
+					local bid = GetPlayerBuffID(index)
+					bid = (bid < -1) and (bid + 65536) or bid
+					if SPELL_SALVATION[bid] then
+						CancelPlayerAuraSpellId(bid, 1)
+						found = true
+					end
 				end
+				counter = counter + 1
 			end
-			counter = counter + 1
-		end
-		if found then
-			UIErrorsFrame:Clear()
-			UIErrorsFrame:AddMessage("Salvation Removed")
+			if found then
+				UIErrorsFrame:Clear()
+				UIErrorsFrame:AddMessage("Salvation Removed")
+			end
+		else
+			for spellId in pairs(SPELL_SALVATION) do
+				CancelPlayerAuraSpellId(spellId, 1)
+			end
 		end
 		return
 	end
@@ -2016,8 +2020,8 @@ function LazyPig_CheckSalvation()
 	-- Tier 2: SuperWoW spell ID iteration (no tooltip scanning)
 	if hasGetPlayerBuffID then
 		local counter = 0
-		while GetPlayerBuff(counter) >= 0 do
-			local index, untilCancelled = GetPlayerBuff(counter)
+		while GetPlayerBuff(counter, "HELPFUL") >= 0 do
+			local index, untilCancelled = GetPlayerBuff(counter, "HELPFUL")
 			if untilCancelled ~= 1 then
 				local bid = GetPlayerBuffID(index)
 				bid = (bid < -1) and (bid + 65536) or bid
@@ -2035,8 +2039,8 @@ function LazyPig_CheckSalvation()
 
 	-- Tier 3: Fallback texture scan (stock 1.12 clients)
 	local counter = 0
-	while GetPlayerBuff(counter) >= 0 do
-		local index, untilCancelled = GetPlayerBuff(counter)
+	while GetPlayerBuff(counter, "HELPFUL") >= 0 do
+		local index, untilCancelled = GetPlayerBuff(counter, "HELPFUL")
 		if untilCancelled ~= 1 then
 			local texture = GetPlayerBuffTexture(index)
 			if texture then
@@ -2078,25 +2082,31 @@ function LazyPig_CheckManaBuffs()
 		return
 	end
 
-	-- Tier 1: Nampower cancel by spell ID (verify buff exists before messaging)
-	if hasNampower_CancelAura and hasGetPlayerBuffID then
-		local found = false
-		local counter = 0
-		while GetPlayerBuff(counter) >= 0 do
-			local index, untilCancelled = GetPlayerBuff(counter)
-			if untilCancelled ~= 1 then
-				local bid = GetPlayerBuffID(index)
-				bid = (bid < -1) and (bid + 65536) or bid
-				if SPELL_MANA_BUFFS[bid] then
-					CancelPlayerAuraSpellId(bid, 1)
-					found = true
+	-- Tier 1: Nampower cancel by spell ID
+	if hasNampower_CancelAura then
+		if hasGetPlayerBuffID then
+			local found = false
+			local counter = 0
+			while GetPlayerBuff(counter, "HELPFUL") >= 0 do
+				local index, untilCancelled = GetPlayerBuff(counter, "HELPFUL")
+				if untilCancelled ~= 1 then
+					local bid = GetPlayerBuffID(index)
+					bid = (bid < -1) and (bid + 65536) or bid
+					if SPELL_MANA_BUFFS[bid] then
+						CancelPlayerAuraSpellId(bid, 1)
+						found = true
+					end
 				end
+				counter = counter + 1
 			end
-			counter = counter + 1
-		end
-		if found then
-			UIErrorsFrame:Clear()
-			UIErrorsFrame:AddMessage("Intellect or Wisdom or Spirit Removed")
+			if found then
+				UIErrorsFrame:Clear()
+				UIErrorsFrame:AddMessage("Intellect or Wisdom or Spirit Removed")
+			end
+		else
+			for spellId in pairs(SPELL_MANA_BUFFS) do
+				CancelPlayerAuraSpellId(spellId, 1)
+			end
 		end
 		return
 	end
@@ -2104,8 +2114,8 @@ function LazyPig_CheckManaBuffs()
 	-- Tier 2: SuperWoW spell ID iteration (no tooltip scanning)
 	if hasGetPlayerBuffID then
 		local counter = 0
-		while GetPlayerBuff(counter) >= 0 do
-			local index, untilCancelled = GetPlayerBuff(counter)
+		while GetPlayerBuff(counter, "HELPFUL") >= 0 do
+			local index, untilCancelled = GetPlayerBuff(counter, "HELPFUL")
 			if untilCancelled ~= 1 then
 				local bid = GetPlayerBuffID(index)
 				bid = (bid < -1) and (bid + 65536) or bid
@@ -2123,8 +2133,8 @@ function LazyPig_CheckManaBuffs()
 
 	-- Tier 3: Fallback texture scan (stock 1.12 clients)
 	local counter = 0
-	while GetPlayerBuff(counter) >= 0 do
-		local index, untilCancelled = GetPlayerBuff(counter)
+	while GetPlayerBuff(counter, "HELPFUL") >= 0 do
+		local index, untilCancelled = GetPlayerBuff(counter, "HELPFUL")
 		if untilCancelled ~= 1 then
 			local texture = GetPlayerBuffTexture(index)
 			if texture then
@@ -2281,8 +2291,8 @@ function LazyPig_HasRighteousFury()
 	-- Tier 2: SuperWoW spell ID check (no tooltip scanning)
 	if hasGetPlayerBuffID then
 		local counter = 0
-		while GetPlayerBuff(counter) >= 0 do
-			local index, untilCancelled = GetPlayerBuff(counter)
+		while GetPlayerBuff(counter, "HELPFUL") >= 0 do
+			local index, untilCancelled = GetPlayerBuff(counter, "HELPFUL")
 			if untilCancelled == 1 then
 				local bid = GetPlayerBuffID(index)
 				bid = (bid < -1) and (bid + 65536) or bid
@@ -2297,8 +2307,8 @@ function LazyPig_HasRighteousFury()
 
 	-- Tier 3: Fallback texture scan
 	local counter = 0
-	while GetPlayerBuff(counter) >= 0 do
-		local index, untilCancelled = GetPlayerBuff(counter)
+	while GetPlayerBuff(counter, "HELPFUL") >= 0 do
+		local index, untilCancelled = GetPlayerBuff(counter, "HELPFUL")
 		if untilCancelled == 1 then
 			local texture = GetPlayerBuffTexture(index)
 			if texture and strfind(texture, "Spell_Holy_SealOfFury") then
