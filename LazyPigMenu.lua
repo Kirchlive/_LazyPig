@@ -74,7 +74,7 @@ LazyPigOptions = {
 	{
 		text = "Tower of Karazhan Options",
 		checkBoxes = {
-			{ text = "Exclude Epics", var = "KARANOEPIC", tooltip = "Exclude Epics", tooltipSub = "Skip epic (purple) items from auto roll.\nUseful for loot masters to distribute epics manually." },
+			{ text = "Exclude Epics (Looted Normally)", var = "KARANOEPIC", tooltip = "Exclude Epics (Looted Normally)", tooltipSub = "Skip epic (purple) items from auto roll.\nEpics will appear in the normal loot roll window.\nUseful for loot masters to distribute epics manually." },
 		},
 	},
 	{
