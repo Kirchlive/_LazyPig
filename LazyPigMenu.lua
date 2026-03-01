@@ -272,7 +272,11 @@ function LazyPig_CreateOptionsFrame()
 			checkBox.tooltipSub = LazyPigOptions[i].checkBoxes[j].tooltipSub
 			checkBox.var = LazyPigOptions[i].checkBoxes[j].var
 			checkBox.value = LazyPigOptions[i].checkBoxes[j].value
-			checkBox.exclusive = LazyPigOptions[i].checkBoxes[j].exclusive ~= nil and LazyPigOptions[i].checkBoxes[j].exclusive or LazyPigOptions[i].exclusive
+			if LazyPigOptions[i].checkBoxes[j].exclusive ~= nil then
+				checkBox.exclusive = LazyPigOptions[i].checkBoxes[j].exclusive
+			else
+				checkBox.exclusive = LazyPigOptions[i].exclusive
+			end
 			checkBox.checkBoxes = LazyPigOptions[i].checkBoxes
 			checkBox.setFunc = LazyPigOptions[i].checkBoxes[j].setFunc
 
