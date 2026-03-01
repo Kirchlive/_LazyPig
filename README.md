@@ -1,4 +1,4 @@
-# _LazyPig - Tetto/Kirchlive Fork
+# _LazyPig Fork update by Tetto/Kirchlive
 
 Forked from the original **_LazyPig** by Ogrisch, mrmr, Lexie and TrumpetX.
 Updated for [Turtle WoW](https://turtle-wow.org/) with new features and bug fixes.
@@ -10,9 +10,8 @@ Updated for [Turtle WoW](https://turtle-wow.org/) with new features and bug fixe
 ## New in v6.2.0-K40
 
 - **Tower of Karazhan Roll Automation** — auto roll all items in Kara40 (Need/Greed/Pass)
-- **Green Items Roll [Ctrl+Alt]** — removed from "Special Key Combinations", now activates/deactivates directly via checkbox
-- **pfUI Compatibility** — Green Items Roll now works with pfUI loot frames
-- Window height increased to fit
+- **Green Items Roll [Ctrl+Alt]** — removed from "Special Key Combinations", now Enable/Disable directly via checkboxes
+- **pfUI Bugfix** — Green Items Roll [Ctrl+Alt] now works with pfUI loot frames
 
 ---
 
