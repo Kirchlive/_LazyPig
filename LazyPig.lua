@@ -26,6 +26,7 @@ LPCONFIG.SAND = 1                  -- [number or nil] Corrupted sand auto roll
 LPCONFIG.ES_SHARDS = nil           -- [number or nil] Dream Shrads auto roll
 LPCONFIG.NAXX = nil                -- [number or nil] Scraps auto roll
 LPCONFIG.KARA = 2                  -- [number or nil] Kara40 auto roll
+LPCONFIG.KARANOEPIC = true         -- Exclude epic items from Kara40 auto roll
 LPCONFIG.ROLLMSG = false           -- Lazy Pig Auto Roll Messages
 LPCONFIG.DUEL = false              -- Auto cancel duels
 LPCONFIG.SPECIALKEY = false        -- Special key combinations
@@ -1048,7 +1049,7 @@ function LazyPig_AutoRoll(id)
 		RollOnLoot(id, LPCONFIG.NAXX)
 	end
 
-	if LPCONFIG.KARA and LazyPig_Kara40() then
+	if LPCONFIG.KARA and LazyPig_Kara40() and not (LPCONFIG.KARANOEPIC and quality == 4) then
 		roll = LPCONFIG.KARA
 		RollOnLoot(id, LPCONFIG.KARA)
 	end

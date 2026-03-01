@@ -72,6 +72,12 @@ LazyPigOptions = {
 		},
 	},
 	{
+		text = "Tower of Karazhan Options",
+		checkBoxes = {
+			{ text = "Exclude Epics", var = "KARANOEPIC", tooltip = "Exclude Epics", tooltipSub = "Skip epic (purple) items from auto roll.\nUseful for loot masters to distribute epics manually." },
+		},
+	},
+	{
 		text = "Salvation Remover",
 		exclusive = true,
 		checkBoxes = {
@@ -148,7 +154,7 @@ function LazyPig_CreateOptionsFrame()
 	tinsert(UISpecialFrames,"LazyPigOptionsFrame")
 	frame:SetFrameStrata("DIALOG")
 	frame:SetWidth(500)
-	frame:SetHeight(720)
+	frame:SetHeight(745)
 	frame:SetPoint("CENTER", UIParent, 0, 80)
 	frame:SetBackdrop({
 		bgFile = "Interface\\Buttons\\WHITE8x8",
@@ -241,7 +247,7 @@ function LazyPig_CreateOptionsFrame()
 	local offsetX, offsetY = insetLeft, insetTop
 	local index = 1
 	for i = 1, getn(LazyPigOptions) do
-		if i == 11 then
+		if i == 12 then
 			offsetX, offsetY = insetLeft + columnWidth, insetTop
 		end
 		
