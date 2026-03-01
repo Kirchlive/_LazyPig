@@ -1,104 +1,136 @@
-# LazyPig
+# _LazyPig - Kirchlive Fork
 
-A World of Warcraft 1.12 addon for Turtle WoW that automates repetitive tasks. Configure in-game with `/lp` or `/lazypig`.
+Forked from the original **_LazyPig** by Ogrisch, mrmr, Lexie and TrumpetX.
+Updated for [Turtle WoW](https://turtle-wow.org/) with new features and bug fixes.
+
+> `## Interface: 11200` | Vanilla WoW 1.12
+
+---
+
+## New in v6.2.0-K40
+
+- **Tower of Karazhan Roll Automation** — auto roll all items in Kara40 (Need/Greed/Pass)
+- **Green Items Roll [Ctrl+Alt]** — removed from "Special Key Combinations", now activates/deactivates directly via its own checkbox
+- **pfUI Compatibility** — Green Items Roll now works with pfUI loot frames
+- Options window height increased to fit new entries
+
+---
 
 ## Features
 
-### Passive (always active when enabled)
-
+### Passive Enhancements
 | Feature | Description |
 |---------|-------------|
-| **Auto Dismount** | Dismounts when casting, interacting with flight masters, etc. Handles Turtle WoW expansion mounts and AQ40 mounts. |
-| **Auto Stance** | Automatically switches to the correct stance/form when a spell requires it. |
-| **Gossip Processing** | Auto-selects gossip options when talking to NPCs (taxi, battlemaster, innkeeper, vendor, banker). Hold Shift to bypass. |
-| **Loot at Cursor** | Positions the loot frame under your cursor. |
-| **Improved Right Click** | Right-clicking a bag item while trade, auction, or mail is open places it directly into that window. |
-| **Chat Spam Filter** | Hides repeated messages in say/yell/channel chat (70s cooldown per unique message). Also suppresses BigWigs cast spam and `#showtooltip` errors. |
-| **Loot Roll Messages** | Optionally hides green/blue roll messages and grey/white loot messages from chat. |
-| **World Chat Mute** | Mutes /world channel while in raids, dungeons, or battlegrounds. Automatically rejoins when you leave. |
-| **Auto Cancel Duels** | Instantly cancels incoming duel requests. |
-| **Auto Accept Invites** | Accepts group invites from guild members, friends, or everyone (configurable). Can be disabled while in BG or BG queue. |
-| **Auto Accept Summons** | Accepts summons 2 seconds before they expire. |
-| **Auto Accept Resurrections** | Accepts resurrections in instances/BGs when the resurrecter is out of combat. |
-| **Extended Camera** | Increases max camera distance to 50 yards. |
+| Auto Dismount | When casting spell or interacting with flightmaster (AQ40 mounts included) |
+| Auto Roll Automation | ZG, MC, AQ, Black Morass, Emerald Sanctum, Naxxramas, **Tower of Karazhan** |
+| Loot Window Auto Position | Under the cursor when looting |
+| Gossip Auto Processing | When talking to NPC (taxi, battlemaster, innkeeper, vendors) |
+| World Chat Mute | Mute /world channel in raid/dungeon/bg zone, filter repeated messages |
+| Improved Right Click | Right click on container item to drag into trade/auction/mail window |
 
-### Battlegrounds
+### Active Enhancements (require modifier key press)
+| Feature | Key | Description |
+|---------|-----|-------------|
+| Green Items Roll | Ctrl+Alt | Roll on green items (works independently, no Special Key Combinations needed) |
+| Stack Split/Merge | Shift+Right Click | Split stacked items |
+| Grey Sell/Repair | Alt (at merchant) | Sell grey items and repair |
+| Repeatable Quests | Alt (at NPC) | Auto-complete token quests (AD, ZG, BG marks) |
 
+### Minor Enhancements
 | Feature | Description |
 |---------|-------------|
-| **Auto Queue** | Automatically queues for the battleground when the battlemaster window opens. |
-| **Auto Join** | Joins the battleground a few seconds before the invitation expires. |
-| **Auto Leave** | Leaves the battleground when a winner is declared. |
-| **Auto Release** | Releases spirit on death in battlegrounds. |
-| **Block Quest Sharing** | Blocks quest share popups while in battlegrounds. |
-| **Queue Announce** | Announces BG queue status to party/raid as leader. |
-| **WSG Flag Carrier Tracking** | Tracks the enemy flag carrier. Bind a key to target them or drop the flag. |
+| Group Auto Accept | 3 modes: Guildmates, Friends, Everyone |
+| Summon Auto Accept | Accept 2 seconds before confirm expires |
+| Instance Resurrection | Auto accept OOC in raids/dungeons/BGs |
+| Extended Camera Distance | Increase max camera distance up to 50y |
+| Duel Auto Decline | Hold Shift to bypass |
+| Auto Stance | Auto change warrior stance/druid form on spell cast |
 
-### Loot Rolling
-
-All roll options support 4 modes: Off, Need, Greed, Pass.
-
-| Feature | Items |
-|---------|-------|
-| **ZG** | Hakkari Bijous and Coins |
-| **MC** | Blood of the Mountain, Fiery Core, Lava Core |
-| **AQ** | Scarabs and Idols |
-| **Naxx** | Wartorn Scraps |
-| **Corrupted Sand** | Corrupted Sand (auto-need) |
-| **Dream Shards** | Dreamscale, Fading Dream Fragment, Small Dream Shard |
-| **Green Items** | All uncommon (green) quality items |
-| **BG Loot** | Auto-need on everything in Alterac Valley |
-
-Necrotic Runes are always auto-needed.
-
-### Buff Removal
-
-| Feature | Description |
-|---------|-------------|
-| **Remove Salvation** | Auto-removes Blessing of Salvation. Two modes: always, or only while tanking (warrior with shield, druid in bear form, paladin with Righteous Fury, shaman tank with Spirit Armor). |
-| **Remove Mana Buffs** | Auto-removes Blessing of Wisdom, Arcane Intellect/Brilliance, Divine Spirit/Prayer of Spirit. Disabled in battlegrounds. |
-
-When [SuperWoW](https://github.com/balakethelock/SuperWoW) or [Nampower](https://github.com/pepopo978/nampower) are installed, buff removal uses spell IDs instead of tooltip scanning for better performance.
-
-### Active (require modifier keys)
-
+### Special Key Combinations (enable separately in `/lp` > Miscellaneous)
 | Keys | Action |
 |------|--------|
-| **Alt + Ctrl + Shift** | Logout (only if no keybind is set for Logout) |
-| **Ctrl + Shift** | Follow target |
-| **Alt + Shift** | Inspect target; bid on auction |
-| **Alt + Ctrl** | Initiate/accept trade; confirm popups (invite, BG entry, release spirit, corpse recovery, summon, etc.); click send mail / create auction / buyout auction; roll on green items |
-| **Shift** (at merchant) | Sell grey items and repair all |
-| **Alt** (at quest detail) | Accept quest |
+| Alt+Ctrl+Shift | Logout |
+| Ctrl+Shift | Follow target |
+| Alt+Shift | Inspect player / Bid auction |
+| Alt+Ctrl | Trade / Confirm popups / Mail / Auction buttons |
 
-### Stack Splitting
+---
 
-Hold **Shift + Right Click** on a stacked item to enter split mode. Use **Alt** to increase and **Ctrl** to decrease the split count. The display shows the current split value.
+## Installation
 
-### Repeatable Quest Replay
+1. Download or clone this repository
+2. Copy the `_LazyPig` folder into `Interface/AddOns/`
+3. Type `/lp` in-game to configure
 
-Hold **Alt** while completing a repeatable quest to record it. Next time you talk to the same NPC with Alt held, all previous actions replay automatically. Works with BG mark turn-ins, AD scourge stones/insignias, ZG coins, and Thorium Shells.
+---
 
-## Keybinds
+## Configuration
 
-Set these in the standard WoW Key Bindings menu under the **_LazyPig** header:
+Type `/lp` or `/lazypig` to open the options window. Most features can be toggled individually.
 
-| Binding | Action |
-|---------|--------|
-| Logout | Logs out |
-| Unstuck | Sends unstuck request |
-| Reload UI | Reloads the interface |
-| Duel / EFC | In WSG: targets enemy flag carrier. Elsewhere: starts or cancels a duel |
-| Drop WSG Flag | Drops the Warsong flag and cancels Slow Fall |
-| Menu | Opens the LazyPig options menu |
+---
 
-## Addons You Can Replace
+## Changelog
 
-LazyPig covers the functionality of these addons:
-- Auto Profit
-- Ez Dismount
-- Automaton
-- Quick Loot
-- Block Salvation
+### v6.2.0-K40 (Kirchlive Fork)
+- Added Tower of Karazhan Roll Automation (auto roll all items in Kara40)
+- Fixed Green Items Roll [Ctrl+Alt] — removed from "Special Key Combinations", activates directly via checkbox
+- Fixed Green Items Roll [Ctrl+Alt] — pfUI compatibility (detects pfLootRollFrame)
+- Increased options window height for new menu entries
 
-If using **MailTo** alongside LazyPig, disable Improved Right Click and Shift Split/Merge in LazyPig to avoid conflicts.
+### v5.01
+- Added auto mana buff remover (Intellect, Spirit, Wisdom)
+
+### v5.00
+- Block Battleground Quest Share feature
+- Brand New GUI by mrmr
+
+### v4.56
+- Minor fixes, resurrection auto accept only in instances
+
+### v4.52
+- Added find WSG EFC binding
+- Improved repeatable quests for WSG and Arathi
+
+### v4.50
+- Added drop WSG Flag binding
+
+### v4.40
+- Added keybindings, spam filter, salvation remover
+
+### v4.00
+- Added GUI (`/lp`)
+
+### v3.50
+- Improved split mechanism
+
+### v3.0
+- Added "Mute World" chat functionality
+
+### v2.88
+- Added Alt+Ctrl green roll key combinations
+
+### v2.7
+- New key combinations, improved right click, auto repair
+
+### v2.5
+- Fixed dismounting with 16+ buffs, BG quest fixes
+
+### v2.3
+- Grey sell, thorium shells automation, auto queue BG
+
+### v1.9
+- Auto roll for ZG bijous and coins
+
+### v1.8
+- Stack split feature
+
+### v1.7
+- Record/replay for repeatable quests
+
+---
+
+## Credits
+
+Original authors: **Ogrisch**, **mrmr**, **Lexie**, **TrumpetX**
+Fork maintainer: **Tetto/Kirchlive**

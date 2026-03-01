@@ -63,6 +63,15 @@ LazyPigOptions = {
 		},
 	},
 	{
+		text = "Tower of Karazhan Roll Automation",
+		exclusive = true,
+		checkBoxes = {
+			{ text = NEED, var = "KARA", value = 1, tooltip = NEED },
+			{ text = GREED, var = "KARA", value = 2, tooltip = GREED },
+			{ text = PASS, var = "KARA", value = 0, tooltip = PASS },
+		},
+	},
+	{
 		text = "Salvation Remover",
 		exclusive = true,
 		checkBoxes = {
@@ -139,7 +148,7 @@ function LazyPig_CreateOptionsFrame()
 	tinsert(UISpecialFrames,"LazyPigOptionsFrame")
 	frame:SetFrameStrata("DIALOG")
 	frame:SetWidth(500)
-	frame:SetHeight(670)
+	frame:SetHeight(720)
 	frame:SetPoint("CENTER", UIParent, 0, 80)
 	frame:SetBackdrop({
 		bgFile = "Interface\\Buttons\\WHITE8x8",
@@ -232,7 +241,7 @@ function LazyPig_CreateOptionsFrame()
 	local offsetX, offsetY = insetLeft, insetTop
 	local index = 1
 	for i = 1, getn(LazyPigOptions) do
-		if i == 10 then
+		if i == 11 then
 			offsetX, offsetY = insetLeft + columnWidth, insetTop
 		end
 		
