@@ -69,7 +69,7 @@ LazyPigOptions = {
 			{ text = NEED, var = "KARA", value = 1, tooltip = NEED },
 			{ text = GREED, var = "KARA", value = 2, tooltip = GREED },
 			{ text = PASS, var = "KARA", value = 0, tooltip = PASS },
-			{ text = "Exclude Epics no automation", var = "KARANOEPIC", tooltip = "Exclude Epics no automation", tooltipSub = "Skip epic (purple) items from auto roll.\nEpics will appear in the normal loot roll window.\nUseful for loot masters to distribute epics manually." },
+			{ text = "Exclude Epics No Automation", var = "KARANOEPIC", exclusive = false, tooltip = "Exclude Epics No Automation", tooltipSub = "Skip epic (purple) items from auto roll.\nEpics will appear in the normal loot roll window.\nUseful for loot masters to distribute epics manually." },
 		},
 	},
 	{
@@ -272,7 +272,7 @@ function LazyPig_CreateOptionsFrame()
 			checkBox.tooltipSub = LazyPigOptions[i].checkBoxes[j].tooltipSub
 			checkBox.var = LazyPigOptions[i].checkBoxes[j].var
 			checkBox.value = LazyPigOptions[i].checkBoxes[j].value
-			checkBox.exclusive = LazyPigOptions[i].exclusive
+			checkBox.exclusive = LazyPigOptions[i].checkBoxes[j].exclusive ~= nil and LazyPigOptions[i].checkBoxes[j].exclusive or LazyPigOptions[i].exclusive
 			checkBox.checkBoxes = LazyPigOptions[i].checkBoxes
 			checkBox.setFunc = LazyPigOptions[i].checkBoxes[j].setFunc
 
@@ -282,7 +282,7 @@ function LazyPig_CreateOptionsFrame()
 					this:SetChecked(true)
 					if this.exclusive then
 						for _, data in pairs(this.checkBoxes) do
-							if data.frame ~= this then
+							if data.frame ~= this and data.frame.exclusive then
 								data.frame:SetChecked(false)
 							end
 						end
@@ -295,7 +295,7 @@ function LazyPig_CreateOptionsFrame()
 			checkBox:SetScript("OnClick", function()
 				if this.exclusive then
 					for _, data in pairs(this.checkBoxes) do
-						if data.frame ~= this then
+						if data.frame ~= this and data.frame.exclusive then
 							data.frame:SetChecked(false)
 						end
 					end
