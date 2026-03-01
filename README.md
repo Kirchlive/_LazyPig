@@ -12,7 +12,7 @@ Updated for [Turtle WoW](https://turtle-wow.org/) with new features and bug fixe
 - **Tower of Karazhan Roll Automation** — auto roll all items in Kara40 (Need/Greed/Pass)
 - **Green Items Roll [Ctrl+Alt]** — removed from "Special Key Combinations", now activates/deactivates directly via checkbox
 - **pfUI Compatibility** — Green Items Roll now works with pfUI loot frames
-- window height increased to fit
+- Window height increased to fit
 
 ---
 
