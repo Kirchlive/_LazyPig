@@ -14,7 +14,7 @@ Updated for [Turtle WoW](https://turtle-wow.org/) with new features and bug fixe
 
 ---
 
-![Cursive Raid Preview](https://i.imgur.com/AqddZgH.png)
+![Cursive Raid Preview](https://i.imgur.com/fy7TYaQ.png)
 
 ## Features
 
