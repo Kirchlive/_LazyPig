@@ -12,6 +12,8 @@ Updated for [Turtle WoW](https://turtle-wow.org/) with new features and bug fixe
 - **Green Items Roll [Ctrl+Alt]** — removed from "Special Key Combinations", now Enable/Disable directly via checkboxes
 - **pfUI Bugfix** — Green Items Roll [Ctrl+Alt] now works with pfUI loot frames
 
+---
+
 ![Cursive Raid Preview](https://i.imgur.com/AqddZgH.png)
 
 ## Features
