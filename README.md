@@ -1,4 +1,4 @@
-# _LazyPig Fork update
+# _LazyPig Fork Update
 **by Tetto/Kirchlive**
 
 Forked from the original **_LazyPig** by Ogrisch, mrmr, Lexie and TrumpetX.
