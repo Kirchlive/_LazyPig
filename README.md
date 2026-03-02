@@ -1,4 +1,4 @@
-# _LazyPig Update 
+# _LazyPig K40 Update 
 **Fork by Tetto/Kirchlive**
 
 Forked from the original **_LazyPig** by Ogrisch, mrmr, Lexie and TrumpetX.
