@@ -1,5 +1,5 @@
-# _LazyPig Fork Update
-**by Tetto/Kirchlive**
+# _LazyPig Update 
+**Fork by Tetto/Kirchlive**
 
 Forked from the original **_LazyPig** by Ogrisch, mrmr, Lexie and TrumpetX.
 Updated for [Turtle WoW](https://turtle-wow.org/) with new features and bug fixes.
