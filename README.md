@@ -72,6 +72,10 @@ Type `/lp` or `/lazypig` to open the options window. Most features can be toggle
 
 ## Changelog
 
+### v6.2.1-K40 (Kirchlive Fork)
+- Fixed Kara40 auto roll now distinguishes K40 from K10 via raid size (>10 members)
+- Added "the rock of desolation" zone (post-Chess port to Sanguinar) to Kara40 detection
+
 ### v6.2.0-K40 (Kirchlive Fork)
 - Added Tower of Karazhan Roll Automation (auto roll all items in Kara40)
 - Fixed Green Items Roll [Ctrl+Alt] — removed from "Special Key Combinations", activates directly via checkbox
