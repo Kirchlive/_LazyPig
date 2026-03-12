@@ -1421,7 +1421,7 @@ end
 
 function LazyPig_Kara40()
 	local inInstance, instanceType = IsInInstance()
-	return inInstance and instanceType == "raid" and GetRealZoneText() == "Tower of Karazhan"
+	return inInstance and instanceType == "raid" and GetRealZoneText() == "Tower of Karazhan" and GetNumRaidMembers() > 10
 end
 
 function LazyPig_Queue()
